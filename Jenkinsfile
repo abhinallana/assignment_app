@@ -1,7 +1,9 @@
 pipeline {
-    agent any
-    
-    tools {dockerTool "docker"}
+    agent {
+        docker {
+            image 'node:12-alpine'
+        }
+    }
 
     stages {
         stage('Checkout') {
