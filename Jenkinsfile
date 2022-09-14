@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Cloning from GitLab repo'
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitLab', url: 'https://gitlab.com/abhinallana/assignment_app.git']]])
+                echo 'Cloning from Github repo'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitLab', url: 'https://github.com/abhinallana/assignment_app.git']]])
                 echo 'Successfully cloned'
                 sh 'docker --version'
             }
