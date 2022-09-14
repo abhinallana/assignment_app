@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker {
+        dockerTool {
             image 'node:12-alpine'
         }
     }
