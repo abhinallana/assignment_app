@@ -11,6 +11,9 @@ pipeline {
             }
         }
         stage('Create and Push Docker image'){
+            agent{
+                docker
+            
             steps{
                 sh 'docker build -t abhinallana/assignment_app:2.0.0 .'
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'password', usernameVariable: 'username')]) {
@@ -18,6 +21,7 @@ pipeline {
                 sh 'docker push abhinallana/assignment_app:2.0.0'
                 }
             }
+          }
         }
     }
 }
