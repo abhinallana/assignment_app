@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        tools {
-          'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
-        }
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -18,10 +12,10 @@ pipeline {
         }
         stage('Create and Push Docker image'){
             steps{
-                sh 'docker build -t assignment_app .'
+                sh 'docker build -t abhinallana/assignment_app:2.0.0 .'
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'password', usernameVariable: 'username')]) {
                 // some block
-                sh 'docker push abhinallana/assignment_app:v0'
+                sh 'docker push abhinallana/assignment_app:2.0.0'
                 }
             }
         }
