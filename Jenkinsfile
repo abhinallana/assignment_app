@@ -13,9 +13,9 @@ pipeline {
         stage('Create and Push Docker image'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'password', usernameVariable: 'username')]) {
-                sh 'docker build -t abhinallana/assignment_app:2.0.0 .'
-                sh 'docker --version'
-                sh 'docker push abhinallana/assignment_app:2.0.0'
+                docker build -t abhinallana/assignment_app:2.0.0 .
+                docker --version
+                docker push abhinallana/assignment_app:2.0.0
                 }
             }
         }
