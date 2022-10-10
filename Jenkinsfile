@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('Docker')
+	}
+
 
     stages {
         stage('Checkout') {
@@ -12,12 +17,18 @@ pipeline {
         }
         stage('Create and Push Docker image'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'password', usernameVariable: 'username')]) {
-                docker build -t abhinallana/assignment_app:2.0.0 .
-                docker --version
-                docker push abhinallana/assignment_app:2.0.0
-                }
+                
+                sh 'docker --version'
+                sh 'docker build -t abhinallana/assignment_app:2.0.0 .'
+                sh 'docker push abhinallana/assignment_app:2.0.0'
+                
             }
         }
     }
+    post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
